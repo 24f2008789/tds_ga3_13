@@ -23,5 +23,4 @@ jobs:
           npx playwright install --with-deps
 
       - name: Run Scraper - 24f2008789@ds.study.iitm.ac.in
-        run: |
-          node scrape.js
+        run: node scrape.js
