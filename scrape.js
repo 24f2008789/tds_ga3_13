@@ -37,8 +37,3 @@ const BASE_URL = "https://sanand0.github.io/tdsdata/js_table/?seed=";
 
   await browser.close();
 })();
-
-  console.log("FINAL TOTAL:", grandTotal);
-
-  await browser.close();
-})();
