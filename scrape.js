@@ -1,6 +1,6 @@
 import { chromium } from "playwright";
 
-const seeds = [88,89,90,91,92,93,94,95,96,97];
+const seeds = [30,31,32,33,34,35,36,37,38,39];
 const BASE_URL = "https://sanand0.github.io/tdsdata/js_table/?seed=";
 
 (async () => {
