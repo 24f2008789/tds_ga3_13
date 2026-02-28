@@ -1,26 +1,42 @@
-const { chromium } = require('playwright');
+import { chromium } from "playwright";
+
+const seeds = [88,89,90,91,92,93,94,95,96,97];
+const BASE_URL = "https://sanand0.github.io/tdsdata/js_table/?seed=";
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
-
   let grandTotal = 0;
 
-  for (let seed = 30; seed <= 39; seed++) {
-    const url = `https://sanand0.github.io/tdsdata/js_table/?seed=${seed}`;
-    await page.goto(url);
+  for (const seed of seeds) {
+    const url = `${BASE_URL}${seed}`;
+    console.log(`Visiting: ${url}`);
+    
+    await page.goto(url, { waitUntil: "networkidle" });
+    await page.waitForSelector("table");
 
-    await page.waitForSelector('table');
+    const total = await page.evaluate(() => {
+      let sum = 0;
+      document.querySelectorAll("table tr").forEach(row => {
+        row.querySelectorAll("td").forEach(cell => {
+          const cleaned = cell.innerText.replace(/[^0-9.-]/g, "");
+          const num = parseFloat(cleaned);
+          if (!isNaN(num)) sum += num;
+        });
+      });
+      return sum;
+    });
 
-    const numbers = await page.$$eval('td', cells =>
-      cells.map(cell => parseInt(cell.textContent))
-    );
-
-    const sum = numbers.reduce((a, b) => a + b, 0);
-    console.log(`Seed ${seed}: ${sum}`);
-
-    grandTotal += sum;
+    console.log(`Seed ${seed} sum = ${total}`);
+    grandTotal += total;
   }
+
+  console.log("===================================");
+  console.log(`FINAL TOTAL = ${grandTotal}`);
+  console.log("===================================");
+
+  await browser.close();
+})();
 
   console.log("FINAL TOTAL:", grandTotal);
 
