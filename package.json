@@ -1,14 +1,23 @@
 {
-  "name": "tds_question_13",
+  "name": "tds_ga3_13",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "scrape.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node scrape.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/24f2008789/tds_ga3_13.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/24f2008789/tds_ga3_13/issues"
+  },
+  "homepage": "https://github.com/24f2008789/tds_ga3_13#readme",
   "dependencies": {
     "playwright": "^1.58.2"
   }
